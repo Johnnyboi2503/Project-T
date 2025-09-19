@@ -16,7 +16,7 @@ public class Interact : MonoBehaviour
     {
         if(InteractableOBJscript != null)
         {
-            InteractableOBJscript.Interacted();//dont chande the name of the function in the interactable scripts
+            InteractableOBJscript.Interacted();//dont change the name of the function in the interactable scripts AKA Keep it as Interacted();
         }
     }
 }
