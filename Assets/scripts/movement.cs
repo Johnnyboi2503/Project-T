@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class movement : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class movement : MonoBehaviour
     public float SlowSpeed;
     public float CurrentSpeed;
     public float CurrentStamina;
+    public Image StaminaBar;
     public float MaxStamina;
     public float StaminaLoss;
     public float StaminaReturn;
@@ -24,10 +25,39 @@ public class movement : MonoBehaviour
         CurrentSpeed = MoveSpeed;
         CurrentStamina = MaxStamina;
         Tiredtimer = TiredtimerMax;
+        StaminaBar.fillAmount = MaxStamina;
     }
-    public void FixedUpdate()
+    public void FixedUpdate()//this updates the staminabar and calcs the speed the player should be moving at bassed on the states of running or not
     {
+        StaminaBar.fillAmount = CurrentStamina / MaxStamina;
         RB.linearVelocity = MoveDirection * CurrentSpeed;
+        switch (MoveDirection.ToString())//changes the interact collider based on the current move direction
+        {
+            case "(1.00, 0.00)":
+                Interact.offset = new Vector2(1, 0);
+                break;
+            case "(-1.00, 0.00)":
+                Interact.offset = new Vector2(-1, 0);
+                break;
+            case "(0.00, 1.00)":
+                Interact.offset = new Vector2(0, 1);
+                break;
+            case "(0.00, -1.00)":
+                Interact.offset = new Vector2(0, -1);
+                break;
+            case "(0.71, 0.71)":
+                Interact.offset = new Vector2(1, 1);
+                break;
+            case "(-0.71, 0.71)":
+                Interact.offset = new Vector2(-1, 1);
+                break;
+            case "(0.71, -0.71)":
+                Interact.offset = new Vector2(1, -1);
+                break;
+            case "(-0.71, -0.71)":
+                Interact.offset = new Vector2(-1, -1);
+                break;
+        }
         if (IsTired)
         {
             Tiredtimer -= Time.fixedDeltaTime;
@@ -61,7 +91,7 @@ public class movement : MonoBehaviour
             }
         }
     }
-    public void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)//this gets the player arrow input direction
     {
         if (context.performed)
         {
@@ -72,7 +102,7 @@ public class movement : MonoBehaviour
             MoveDirection = new Vector2(0, 0);
         }
     }
-    public void Running(InputAction.CallbackContext context)
+    public void Running(InputAction.CallbackContext context)//this gets the running input
     {
         if (context.performed && IsTired != true)
         {
