@@ -3,7 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Walls
+  - KeyCard1
+  - Gate1
+  - Gate2
+  - KeyCard2
+  - DoorPannel1
+  - PannelKey1
+  - PannelKey2
+  - PannelKey3
+  - DoorPannel2
+  - DoorPannel3
+  - BodyPart
+  - LookPart
+  - FloatPart
+  - MotorPart
+  - RepairPannel
+  - Submarine
   layers:
   - Default
   - TransparentFX
