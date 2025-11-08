@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public bool isHolding;
     private Vector2 lastMoveDir = Vector2.down; // default facing down
 
+    // enemy attack
+    //public Transform melee;
+    //public Transform gun;
 
     //public Sprite upSprite;
     //public Sprite downSprite;
@@ -61,6 +64,8 @@ public class PlayerController : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; 
     }
 
     // Update is called once per frame
@@ -132,7 +137,11 @@ public class PlayerController : MonoBehaviour
             isHolding = false;
         }
 
-        // add melee here 
+        // Melee
+        //if (Input.GetKey(KeyCode.Mouse0))
+        //{
+
+        //}
 
         if (PannelOn1 == true && PannelOn2 == true && PannelOn3 == true)
         {
@@ -276,6 +285,11 @@ public class PlayerController : MonoBehaviour
         {
             // player wins
             SceneManager.LoadScene(1);
+        }
+
+        if (collision.gameObject.TryGetComponent<Health>(out var health))
+        {
+            health.Damage(amount: 3);
         }
     }
 
