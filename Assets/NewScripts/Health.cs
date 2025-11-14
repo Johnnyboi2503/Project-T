@@ -55,6 +55,4 @@ public class Health : MonoBehaviour
     
 
     public void Adjust(int value) => Hp = value;
-
-
 }
