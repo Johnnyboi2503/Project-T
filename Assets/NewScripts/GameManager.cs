@@ -37,9 +37,9 @@ public class GameManager : MonoBehaviour
             spawnTimer += Time.deltaTime;
             if (spawnTimer > 2)
             {
-                int random = Random.Range(0, EnemySpawn.Length);
+                int random = Random.Range(0, EnemySpawn.Length); // random enemyspawns
 
-                SpawnEnemy(random);
+                SpawnEnemy(random); // will spawn enemy in random enemyspawners
 
                 spawnTimer = 0;
             }
