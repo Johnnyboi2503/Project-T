@@ -1,10 +1,9 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class EnemyController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
-    public float speed;
-    public float enemyRadius = 9;
+    public float speed = 6.19f;
+    public float enemyRadius = 20;
     public float attackAgainTimer;
     public bool hasAttacked;
 
@@ -29,38 +28,38 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = target.transform.position - transform.position;
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        if(distance < enemyRadius) // if the player goes inside the enemy radius the enemy will chase the player, as long as the player is still in the radius
+        if (distance < enemyRadius) // if the player goes inside the enemy radius the enemy will chase the player, as long as the player is still in the radius
         {
             transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
-        if(hasAttacked == true)
+        if (hasAttacked == true)
         {
             enemyRadius = 0;
             attackAgainTimer += Time.deltaTime;
-            if (attackAgainTimer > 0.2)
+            if (attackAgainTimer > 0.15)
             {
-                enemyRadius = 9;
+                enemyRadius = 20;
                 hasAttacked = false;
                 attackAgainTimer = 0;
             }
         }
 
-        
 
-        
+
+
 
         RB.linearVelocity = vel;
     }
 
-    
 
-    private void OnCollisionEnter2D(Collision2D collision) 
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player") && collision.gameObject.TryGetComponent<Health>(out var health)) // deal damage to the player when colldiing with it
+        if (collision.gameObject.TryGetComponent<Health>(out var health) && collision.gameObject.tag.Equals("Player")) // deal damage to the player when colldiing with it
         {
-            health.Damage(amount: 10);
+            health.Damage(amount: 30);
             hasAttacked = true;
         }        
     }

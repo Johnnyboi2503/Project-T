@@ -1,11 +1,14 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] EnemySpawn;
     public GameObject enemy;
+    public GameManager boss;
 
     public float spawnTimer;
+    public float bossTimer;
 
     public float safeTimer;
     public float dangerTimer;
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
         if (onDanager == false) // enemys will not spawn until the safe timer is up
         {
             safeTimer += Time.deltaTime;
+            bossTimer += Time.deltaTime;
             if (safeTimer > 20)
             {
                 onDanager = true;
@@ -52,14 +56,26 @@ public class GameManager : MonoBehaviour
             spawnTimer = 0;
         }
 
-        
+        if(bossTimer > 20)
+        {
+            int random = Random.Range(0, EnemySpawn.Length); // random enemyspawns
+            SpawnBoss(random); //will spawn boss in random enemyspawner
+            bossTimer = 0;
+        }
 
     }
 
     void SpawnEnemy(int index)
-    {// get the position and rotation of random enemy spawn
-        Transform spawnPoint = EnemySpawn[index].transform; 
+    {
+        Transform spawnPoint = EnemySpawn[index].transform; // get the position and rotation of random enemy spawn
 
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation); // spawn enemy 
+    }
+
+    void SpawnBoss(int index)
+    {
+        Transform spawnPoint = EnemySpawn[index].transform; // get the position and rotation of random enemy spawn
+
+        Instantiate(boss, spawnPoint.position, spawnPoint.rotation); // spawn boss
     }
 }

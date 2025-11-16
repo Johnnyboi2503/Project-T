@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastMoveDir = Vector2.down; // default facing down
 
     // enemy attack
-    //public Transform melee;
+    public GameObject melee;
+    public bool holdingMelee;
     //public Transform gun;
 
     //public Sprite upSprite;
@@ -64,8 +65,9 @@ public class PlayerController : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
+        Cursor.visible = false;
+
+        melee.SetActive(false);
     }
 
     // Update is called once per frame
@@ -137,11 +139,20 @@ public class PlayerController : MonoBehaviour
             isHolding = false;
         }
 
-        // Melee
-        //if (Input.GetKey(KeyCode.Mouse0))
-        //{
-
-        //}
+        // equip melee
+        if (Input.GetKey(KeyCode.Alpha1) && holdingMelee == false && heldObject == null)
+        {
+            melee.SetActive(true);
+            holdingMelee = true;
+            Cursor.visible = true;
+        }
+        // unequip melee
+        if (Input.GetKey(KeyCode.Alpha2) && holdingMelee == true)
+        {
+            melee.SetActive(false);
+            holdingMelee = false;
+            Cursor.visible = false;
+        }
 
         if (PannelOn1 == true && PannelOn2 == true && PannelOn3 == true)
         {
@@ -287,15 +298,15 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(1);
         }
 
-        if (collision.gameObject.TryGetComponent<Health>(out var health))
-        {
-            health.Damage(amount: 3);
-        }
+        //if (collision.gameObject.TryGetComponent<Health>(out var health))
+        //{
+        //    health.Damage(amount: 3);
+        //}
     }
 
     void PickUpObject(GameObject obj)
     {
-        if (heldObject == null)
+        if (heldObject == null && holdingMelee == false)
         {
             heldObject = obj;
             obj.transform.SetParent(holding);

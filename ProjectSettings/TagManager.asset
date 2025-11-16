@@ -21,6 +21,7 @@ TagManager:
   - MotorPart
   - RepairPannel
   - Submarine
+  - Sword
   layers:
   - Default
   - TransparentFX
