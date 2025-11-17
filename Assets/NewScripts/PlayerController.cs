@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)) // to sprint
         {
             speed = 6.2f;
         }
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
 
     void PickUpObject(GameObject obj)
     {
-        if (heldObject == null && holdingMelee == false)
+        if (heldObject == null && holdingMelee == false) // only able to pick up something if you arent holding sanything and not holing melee 
         {
             heldObject = obj;
             obj.transform.SetParent(holding);
@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
 
     void DropHeldObject()
     {
-        if (heldObject != null)
+        if (heldObject != null) // drop whatever you are holing
         {
             heldObject.transform.SetParent(null);
             Rigidbody2D rb = heldObject.GetComponent<Rigidbody2D>();
@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ImDead()
+    public void ImDead() // plays the you lose scene
     {
         SceneManager.LoadScene(2);
     }
