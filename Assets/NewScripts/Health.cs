@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHp = 100;
     [SerializeField] private int _hp;
+
+    public Image healthBar; 
 
     public int MaxHp => _maxHp;
 
@@ -32,6 +36,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        healthBar.fillAmount = Mathf.Clamp((float)_hp / _maxHp, 0f, 1f);
+    }
+
     public UnityEvent<int> Healed;
     public UnityEvent<int> Damaged;
     public UnityEvent Died;
@@ -55,4 +64,6 @@ public class Health : MonoBehaviour
     
 
     public void Adjust(int value) => Hp = value;
+
+    
 }

@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerWins.unity
     guid: d2db6130ac296428287869189e964d4f
+  - enabled: 1
+    path: Assets/Scenes/PlayerLoses.unity
+    guid: 64594a5eb90234178bae08b156919b10
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] EnemySpawn;
     public GameObject enemy;
-    public GameManager boss;
+    public GameObject boss;
 
     public float spawnTimer;
     public float bossTimer;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             spawnTimer = 0;
         }
 
-        if(bossTimer > 20)
+        if(bossTimer > 40)
         {
             int random = Random.Range(0, EnemySpawn.Length); // random enemyspawns
             SpawnBoss(random); //will spawn boss in random enemyspawner

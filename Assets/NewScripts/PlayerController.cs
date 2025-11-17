@@ -297,11 +297,7 @@ public class PlayerController : MonoBehaviour
             // player wins
             SceneManager.LoadScene(1);
         }
-
-        //if (collision.gameObject.TryGetComponent<Health>(out var health))
-        //{
-        //    health.Damage(amount: 3);
-        //}
+        
     }
 
     void PickUpObject(GameObject obj)
@@ -332,5 +328,10 @@ public class PlayerController : MonoBehaviour
             holdingLookPart = false;
             holdingMotorPart = false;
         }
+    }
+
+    public void ImDead()
+    {
+        SceneManager.LoadScene(2);
     }
 }
